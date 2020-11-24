@@ -20,6 +20,13 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<%
+   String id = request.getParameter("id");
+   Candidate candidate = new Candidate(0, "");
+   if (id != null) {
+       candidate = Store.instOf().findId(Integer.valueOf(id));
+   }
+%>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
@@ -27,10 +34,10 @@
                 Новый кандидат.
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidate/save" method="post">
+                <form action="<%=request.getContextPath()%>/candidate/save?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
