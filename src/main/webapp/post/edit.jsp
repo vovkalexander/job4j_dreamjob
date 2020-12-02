@@ -24,7 +24,7 @@
     String id = request.getParameter("id");
     Post post = new Post(0, "");
     if (id != null) {
-        post = Store.instOf().findById(Integer.valueOf(id));
+        post = MemStore.instOf().findById(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">
