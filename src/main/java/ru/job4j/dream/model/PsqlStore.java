@@ -1,9 +1,7 @@
 package ru.job4j.dream.model;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -89,6 +87,7 @@ public class PsqlStore implements Store {
         }
     }
 
+    @Override
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             create(candidate);
@@ -157,7 +156,7 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public Post findById(int id) {
+    public Post findPostById(int id) {
         Post post = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("Select * from post where id = ?")) {
@@ -170,5 +169,21 @@ public class PsqlStore implements Store {
             LOG.error(e.getMessage(), e);
         }
         return post;
+    }
+
+    @Override
+    public Candidate findCandidateById(int id) {
+        Candidate candidate = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("Select * from candidate where id = ?")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                candidate = new Candidate(rs.getInt(id), rs.getString("name"));
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return candidate;
     }
 }

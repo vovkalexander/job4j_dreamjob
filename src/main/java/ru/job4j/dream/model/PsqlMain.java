@@ -7,7 +7,7 @@ public class PsqlMain {
         for (Post post : store.findAllPosts()) {
             System.out.println(post.getId() + " " + post.getName());
         }
-        Post post = store.findById(1);
+        Post post = store.findPostById(1);
         post.setName("new Java Job");
         store.save(post);
         System.out.println(post.getId() + " " + post.getName());
