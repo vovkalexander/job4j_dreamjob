@@ -69,7 +69,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("Select * from candidate")) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"), it.getString("photoId")));
                 }
             }
         } catch (Exception e) {
@@ -115,9 +115,10 @@ public class PsqlStore implements Store {
 
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, photoId) VALUES (?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
+            ps.setString(2, candidate.getPhotoId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -145,9 +146,10 @@ public class PsqlStore implements Store {
     private void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "UPDATE candidate Set name = ? where id = ?")) {
+                     "UPDATE candidate Set name = ?, photoId = ? where id = ?")) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
+            ps.setString(2, candidate.getPhotoId());
+            ps.setInt(3, candidate.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -179,11 +181,25 @@ public class PsqlStore implements Store {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                candidate = new Candidate(rs.getInt(id), rs.getString("name"));
+                candidate = new Candidate(rs.getInt(id), rs.getString("name"),
+                        rs.getString("photoId"));
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
         return candidate;
     }
+
+    @Override
+    public void deleteCandidate(String id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DElETE from candidate where id = ?")) {
+            ps.setInt(1, Integer.valueOf(id));
+            ps.executeUpdate();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+
+    }
+
 }

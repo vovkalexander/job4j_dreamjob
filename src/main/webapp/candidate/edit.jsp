@@ -21,11 +21,11 @@
 </head>
 <body>
 <%
-   String id = request.getParameter("id");
-   Candidate candidate = new Candidate(0, "");
-   if (id != null) {
-       candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
-   }
+    String id = request.getParameter("id");
+    Candidate candidate = new Candidate(0, "", "");
+    if (id != null) {
+        candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
+    }
 %>
 <div class="container pt-3">
     <div class="row">
@@ -34,10 +34,15 @@
                 Новый кандидат.
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" enctype="multipart/form-data" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
+                        <label>
+                            <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
+                        </label>
+                        <div class = "checkbox">
+                            <input type = "file" name ="photoId">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

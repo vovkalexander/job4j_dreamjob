@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.*" %>
-<%@ page import="java.util.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -44,6 +42,20 @@
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value='/download?photoId=${candidate.photoId}'/>">Download </a>
+                            </td>
+                            <td>
+                                <img src="<c:url value='/download?photoId=${candidate.photoId}'/>"
+                                     alt="photo"  width="100px" height="100px"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value='/delete?id=${candidate.id}'/>">
+                                    <button type="submit" class = "btn btn-primary">
+                                        <i class = "fa  fa-trash"> Trash</i>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

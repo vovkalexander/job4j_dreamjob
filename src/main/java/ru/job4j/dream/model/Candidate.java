@@ -5,10 +5,16 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
+    private String photoId;
 
-    public Candidate(int id, String name) {
+    public Candidate(int id, String name, String photoId) {
         this.id = id;
         this.name = name;
+        this.photoId = photoId;
+    }
+
+    public String getPhotoId() {
+        return photoId;
     }
 
     public void setId(int id) {
@@ -36,7 +42,8 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id && Objects.equals(name, candidate.name);
+        return id == candidate.id && name.equals(candidate.name)
+                && photoId.equals(candidate.photoId);
     }
 
     @Override

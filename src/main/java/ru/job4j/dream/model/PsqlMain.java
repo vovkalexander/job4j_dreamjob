@@ -11,9 +11,9 @@ public class PsqlMain {
         post.setName("new Java Job");
         store.save(post);
         System.out.println(post.getId() + " " + post.getName());
-        store.save(new Candidate(0, "Junior Java"));
+        store.save(new Candidate(0, "Junior Java", ""));
         for (Candidate candidate : store.findAllCandidates()) {
-            System.out.println(candidate.getId() + " " + candidate.getName());
+            System.out.println(candidate.getId() + " " + candidate.getName() + " " + candidate.getPhotoId());
         }
     }
 }
