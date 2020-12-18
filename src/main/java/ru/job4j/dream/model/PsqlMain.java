@@ -15,5 +15,12 @@ public class PsqlMain {
         for (Candidate candidate : store.findAllCandidates()) {
             System.out.println(candidate.getId() + " " + candidate.getName() + " " + candidate.getPhotoId());
         }
+        User user = new User();
+        user.setName("Pupkin");
+        user.setEmail("Pupa@gmail.com");
+        user.setPassword("qwerty");
+        store.save(user);
+        store.findUserByDate("Pupkin", "Pupa@gmail.com");
+        System.out.println(store.findUserByDate("Pupkin", "Pupa@gmail.com").getPassword());
     }
 }
