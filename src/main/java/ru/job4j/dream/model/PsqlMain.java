@@ -20,7 +20,6 @@ public class PsqlMain {
         user.setEmail("Pupa@gmail.com");
         user.setPassword("qwerty");
         store.save(user);
-        store.findUserByDate("Pupkin", "Pupa@gmail.com");
-        System.out.println(store.findUserByDate("Pupkin", "Pupa@gmail.com").getPassword());
+        System.out.println(store.findUserByDate("Pupa@gmail.com", "qwerty").getName());
     }
 }

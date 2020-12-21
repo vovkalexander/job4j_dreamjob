@@ -248,13 +248,13 @@ public class PsqlStore implements Store {
         }
     }
 
-    public User findUserByDate(String name, String email) {
+    public User findUserByDate(String email, String password) {
         User user = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "SELECT * from users WHERE name = ? AND email = ?")) {
-            ps.setString(1, name);
-            ps.setString(2, email);
+                     "SELECT * from users WHERE email = ? AND password = ?")) {
+            ps.setString(1, email);
+            ps.setString(2, password);
             ps.execute();
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
