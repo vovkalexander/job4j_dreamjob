@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href= href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function  validate() {
+            var result = true;
+            var name = document.getElementsByName("name")[0].value
+            var surname = document.getElementsByName("surname")[0].value
+            var male = document.getElementsByName("gender")[0]
+            var female = document.getElementsByName("gender")[1]
+            if(name == '' || surname == '' || !male.checked  && !female.checked) {
+                result = false;
+            }
+
+            if (!result) {
+                alert("Please connect input date")
+            }
+            return result;
+        }
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>My First Bootstrap Page</h1>
+    <p>This is some text.</p>
+</div>
+<div  class="form-group">
+    <form action="posts.do"  method="post" onsubmit="return validate()">
+        Name:    <input type="text" name = "name"/> <br/>
+        SurName: <input type = "text" name = "surname" /> <br/>
+        Gender:
+        <input type = "radio" name = "gender" value="Male"  > Male
+        <input type = "radio" name = "gender" value="Female" > Female <br/>
+        Description:<br> <textarea name="textarea" cols="48" rows="5"></textarea><br/><br/>
+        <input type = "submit" value="send">
+    </form>
+</div >
+<br/>
+<div class = "table">
+    <table style="border: 1px solid #000000" border="1" cellpadding="1" cellspacing="0" width="370" >
+        <thead >
+        <tr >
+            <th >Name</th>
+            <th>Surname</th>
+            <th>Gender</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="text-align:center;">name</td>
+            <td style="text-align:center;">surname</td>
+            <td style="text-align:center;">gender</td>
+            <td style="text-align:center;">description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
