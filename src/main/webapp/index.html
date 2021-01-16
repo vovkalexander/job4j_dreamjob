@@ -10,19 +10,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function  validate() {
-            var result = true;
-            var name = document.getElementsByName("name")[0].value
-            var surname = document.getElementsByName("surname")[0].value
-            var male = document.getElementsByName("gender")[0]
-            var female = document.getElementsByName("gender")[1]
-            if(name == '' || surname == '' || !male.checked  && !female.checked) {
-                result = false;
+            var value = "";
+            //  var result = true;
+            //   var name = document.getElementsByName("name")[0].value
+            //   var surname = document.getElementsByName("surname")[0].value
+            //   var male = document.getElementsByName("gender")[0]
+            //   var female = document.getElementsByName("gender")[1]
+            //   if(name == '' || surname == '' || !male.checked  && !female.checked) {
+            //       result = false;
+     //   }
+
+     //   if (!result) {
+       //     alert("Please connect input date")
+
+       // }
+
+
+            if ($('#name').val() == '') {
+                value = "name ";
+            }
+            if ($('#surname').val() == '') {
+                value = value + "surname ";
+            }
+            if (!$('#man').prop("checked") && !$('#woman').prop("checked") ) {
+                value = value + "man ";
+                value = value + "woman ";
             }
 
-            if (!result) {
-                alert("Please connect input date")
+            if ($("#description").val() == '') {
+                value = value + "description ";
             }
-            return result;
+
+            if (value!= "") {
+                alert("Fill up field: " + value);
+            }
+        return  value == "" ;
         }
     </script>
 </head>
@@ -30,16 +52,29 @@
 <div class="container-fluid">
     <h1>My First Bootstrap Page</h1>
     <p>This is some text.</p>
-</div>
-<div  class="form-group">
-    <form action="posts.do"  method="post" onsubmit="return validate()">
-        Name:    <input type="text" name = "name"/> <br/>
-        SurName: <input type = "text" name = "surname" /> <br/>
+    <form action="posts.do"  method="post" >
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id = "name" name = "name"/> <br/>
+        </div>
+        <div class="form-group">
+            <label for="surname">SurName:</label>
+            <input type = "text" id = "surname" name = "surname" /> <br/>
+        </div>
         Gender:
-        <input type = "radio" name = "gender" value="Male"  > Male
-        <input type = "radio" name = "gender" value="Female" > Female <br/>
-        Description:<br> <textarea name="textarea" cols="48" rows="5"></textarea><br/><br/>
-        <input type = "submit" value="send">
+        <div class="form-group">
+            <input type = "radio" id = "man" name = "gender" value="Male">
+            <label for="man">Male</label>
+        </div>
+        <div class="form-group">
+            <input type = "radio" id = "woman" name = "gender" value="Female">
+            <label for="woman">Female</label>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label><br/>
+            <textarea id = "description" name="textarea" cols="48" rows="5"></textarea><br/><br/>
+        </div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Send</button>
     </form>
 </div >
 <br/>
