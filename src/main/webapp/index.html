@@ -18,12 +18,12 @@
             //   var female = document.getElementsByName("gender")[1]
             //   if(name == '' || surname == '' || !male.checked  && !female.checked) {
             //       result = false;
-     //   }
+            //   }
 
-     //   if (!result) {
-       //     alert("Please connect input date")
+            //   if (!result) {
+            //     alert("Please connect input date")
 
-       // }
+            // }
 
 
             if ($('#name').val() == '') {
@@ -44,7 +44,24 @@
             if (value!= "") {
                 alert("Fill up field: " + value);
             }
-        return  value == "" ;
+            return  value == "" ;
+        }
+
+        function addRow() {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var description = $('#description').val();
+            var gender;
+            if ($('#man').prop("checked")) {
+                gender = $('#man').val();
+            } else if ($('#woman').prop("checked")) {
+                gender = $('#woman').val();
+            }
+            $('#table tr:last').after('<tr><td>'+ name+'</td><td>'
+                +  surname + '</td><td>'
+                +  gender + '</td><td>'
+                +  description + '</td><td>' +
+                '</td></tr>');
         }
     </script>
 </head>
@@ -79,7 +96,7 @@
 </div >
 <br/>
 <div class = "table">
-    <table style="border: 1px solid #000000" border="1" cellpadding="1" cellspacing="0" width="370" >
+    <table id = "table" style="border: 1px solid #000000" border="1" cellpadding="1" cellspacing="0" width="370" >
         <thead >
         <tr >
             <th >Name</th>
@@ -97,6 +114,10 @@
         </tr>
         </tbody>
     </table>
+</div>
+</br>
+<div class="tableTable">
+    <button type="button" class="btn btn-default" onclick="addRow();">Fill Table</button>
 </div>
 </body>
 </html>
