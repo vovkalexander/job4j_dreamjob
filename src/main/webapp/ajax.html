@@ -15,10 +15,10 @@
             type: 'GET',
             crossdomain: true,
             url: 'http://localhost:8080//job4j_dreamjob_war_exploded/greet',
-            data: 'name=' + $('#exampleInputEmail1').val(),
-            dataType: 'text'
+            data: {name: $('#exampleInputEmail1').val() },
+            dataType: 'json'
         }).done(function(data) {
-            document.body.prepend(data);
+            document.body.prepend(data["key"]);
         }).fail(function(err){
             alert(err);
         });
