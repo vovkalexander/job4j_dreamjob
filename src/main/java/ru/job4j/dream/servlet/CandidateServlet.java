@@ -18,7 +18,8 @@ import java.util.List;
 
 public class CandidateServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         req.setAttribute("candidates", PsqlStore.instOf().findAllCandidates());
@@ -39,6 +40,7 @@ public class CandidateServlet extends HttpServlet {
         File file = null;
         String name = "";
         String photoId = "";
+        Integer cityId = 0;
         try {
             List<FileItem> items = upload.parseRequest(req);
             for (FileItem item : items) {
@@ -65,7 +67,7 @@ public class CandidateServlet extends HttpServlet {
         PsqlStore.instOf().save(
                 new Candidate(Integer.valueOf(req.getParameter("id")),
                         name,
-        photoId));
+        photoId, cityId));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

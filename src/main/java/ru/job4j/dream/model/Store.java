@@ -17,7 +17,11 @@ public interface Store {
 
     void deleteCandidate(String id);
 
-    void save(User user);
+    void saveUser(User user);
 
     User findUserByDate(String name, String email);
+
+    Collection<City> findAllCities();
+
+
 }

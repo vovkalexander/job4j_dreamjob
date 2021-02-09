@@ -11,15 +11,16 @@ public class PsqlMain {
         post.setName("new Java Job");
         store.save(post);
         System.out.println(post.getId() + " " + post.getName());
-        store.save(new Candidate(0, "Junior Java", ""));
+        store.save(new Candidate(0, "Junior Java", "", 0));
         for (Candidate candidate : store.findAllCandidates()) {
-            System.out.println(candidate.getId() + " " + candidate.getName() + " " + candidate.getPhotoId());
+            System.out.println(candidate.getId() + " " + candidate.getName() + " " + candidate.getPhotoId()
+            + " " + candidate.getCityId());
         }
         User user = new User();
         user.setName("Pupkin");
         user.setEmail("Pupa@gmail.com");
         user.setPassword("qwerty");
-        store.save(user);
+        store.saveUser(user);
         System.out.println(store.findUserByDate("Pupa@gmail.com", "qwerty").getName());
     }
 }

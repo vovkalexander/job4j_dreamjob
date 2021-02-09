@@ -43,11 +43,17 @@ public class StoreStub implements Store {
     }
 
     @Override
-    public void save(User user) {
+    public void saveUser(User user) {
+
     }
 
     @Override
     public   User findUserByDate(String name, String email) {
+        return null;
+    }
+
+    @Override
+    public   Collection<City> findAllCities() {
         return null;
     }
 }

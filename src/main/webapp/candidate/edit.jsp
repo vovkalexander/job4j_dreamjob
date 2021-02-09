@@ -21,9 +21,52 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script>
+    function  validate() {
+        var value = "";
+        if ($('#name').val() == '') {
+            value = "name ";
+        }
+        if ($('#photoId').val() == '') {
+            value = value + "photoId ";
+        }
+        if ($('#city').val() == '') {
+            value = value + "cityId ";
+        }
+        if (value!= "") {
+            alert("Fill up field: " + value);
+        }
+        return  value == "" ;
+    }
+</script>
+
+<script>
+    function chooseCity() {
+        var $select = $('#city');
+        $.ajax({
+            type: 'GET',
+            crossdomain: true,
+            url: 'http://localhost:8080/job4j_dreamjob_war_exploded/city.do',
+            dataType: 'json'
+        }).done(function (data) {
+            var dataCity = JSON.stringify(data);
+            var listCity = JSON.parse(dataCity );
+            $select.html('');
+            $select.append('<option value="" selected ></option>')
+            for (var i = 0; i < listCity.length; i++) {
+                $select.append('<option value ="' + listCity[i].id + '">'
+                    + listCity[i].city + '</option>')
+            }
+        }).fail(function (err) {
+            alert(err);
+        });
+    }
+    window.onload = chooseCity;
+</script>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "", "");
+    Candidate candidate = new Candidate(0, "", "", 0);
     if (id != null) {
         candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
@@ -44,13 +87,19 @@
                     <div class="form-group">
                         <label>Имя</label>
                         <label>
-                            <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
+                            <input type="text" class="form-control" id = "name"  name="name" value="<%=candidate.getName()%>">
                         </label>
                         <div class = "checkbox">
-                            <input type = "file" name ="photoId">
+                            <input type = "file" id="photoId" name ="photoId">
+                        </div>
+                        <div class = "form-group">
+                            <label for="city">Город:</label>
+                            <select id="city" name="cityId" value="<%=candidate.getCityId()%>">
+                                <option value=""></option>
+                            </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate()" >Сохранить</button>
                 </form>
             </div>
         </div>
