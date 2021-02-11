@@ -1,9 +1,6 @@
 package ru.job4j.dream.servlet;
 
-import ru.job4j.dream.model.PsqlStore;
-import ru.job4j.dream.model.Store;
-import ru.job4j.dream.model.User;
-
+import ru.job4j.dream.model.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +20,7 @@ public class RegServlet extends HttpServlet {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
-        PsqlStore.instOf().save(user);
+        PsqlStore.instOf().saveUser(user);
         req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 }
