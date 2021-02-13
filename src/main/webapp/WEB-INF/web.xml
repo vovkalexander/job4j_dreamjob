@@ -44,54 +44,87 @@
     <servlet-name>CityServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.CityServlet</servlet-class>
   </servlet>
+
  <!-- <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
   </filter>-->
+    <filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>ru.job4j.dream.filter.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.allowed.origins</param-name>
+            <param-value>*</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.allowed.methods</param-name>
+            <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.allowed.headers</param-name>
+            <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.exposed.headers</param-name>
+            <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.support.credentials</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cors.preflight.maxage</param-name>
+            <param-value>10</param-value>
+        </init-param>
+  </filter>
 
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/index.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>PostServlet</servlet-name>
-    <url-pattern>/posts.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CandidateServlet</servlet-name>
-    <url-pattern>/candidates.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>DownloadServlet</servlet-name>
-    <url-pattern>/download</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>DeleteCandidate</servlet-name>
-    <url-pattern>/delete</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AuthServlet</servlet-name>
-    <url-pattern>/auth.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>RegServlet</servlet-name>
-    <url-pattern>/reg.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GreetingServlet</servlet-name>
-    <url-pattern>/greet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CityServlet</servlet-name>
-    <url-pattern>/city.do</url-pattern>
-  </servlet-mapping>
- <!-- <filter-mapping>
-    <filter-name>AuthFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping> -->
+   <servlet-mapping>
+     <servlet-name>IndexServlet</servlet-name>
+     <url-pattern>/index.do</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>PostServlet</servlet-name>
+     <url-pattern>/posts.do</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>CandidateServlet</servlet-name>
+     <url-pattern>/candidates.do</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>UploadServlet</servlet-name>
+     <url-pattern>/upload</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>DownloadServlet</servlet-name>
+     <url-pattern>/download</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>DeleteCandidate</servlet-name>
+     <url-pattern>/delete</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>AuthServlet</servlet-name>
+     <url-pattern>/auth.do</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>RegServlet</servlet-name>
+     <url-pattern>/reg.do</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>GreetingServlet</servlet-name>
+     <url-pattern>/greet</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>CityServlet</servlet-name>
+     <url-pattern>/city.do</url-pattern>
+   </servlet-mapping>
+    <!-- <filter-mapping>
+     <filter-name>AuthFilter</filter-name>
+     <url-pattern>*.do</url-pattern>
+   </filter-mapping> -->
+  <filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
 
 </web-app>
