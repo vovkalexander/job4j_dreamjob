@@ -21,7 +21,6 @@ import static org.junit.Assert.assertThat;
 @PrepareForTest(PsqlStore.class)
 
 public class PostServletTest {
-
     @Test
     public void whenAddPostThenFillsUpDB() throws ServletException, IOException {
         Store store = new StoreStub();
